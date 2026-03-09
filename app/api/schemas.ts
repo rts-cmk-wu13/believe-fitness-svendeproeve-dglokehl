@@ -15,3 +15,9 @@ export const SignupSchema = z.object({
     message: "Repeat your chosen password",
     path: ["passwordConfirm"],
 });
+
+
+
+export const NewsletterSchema = z.object({
+    email: z.email({ error: "Enter a valid email" }),
+});
