@@ -1,0 +1,17 @@
+import * as z from "zod";
+
+export const LoginSchema = z.object({
+    username: z.string({ error: "Enter your username" }).min(1, { error: "Enter your username" }),
+    password: z.string({ error: "Enter your password" }).min(1, { error: "Enter your password" }),
+});
+
+export const SignupSchema = z.object({
+    firstname: z.string({ error: "Enter your first name" }).min(1, { error: "Enter your first name" }),
+    lastname: z.string({ error: "Enter your last name" }).min(1, { error: "Enter your last name" }),
+    username: z.string({ error: "Enter a username" }).min(4, { error: "Your username must contain at least 4 characters" }),
+    password: z.string({ error: "Enter a password" }).min(4, { error: "Your password must contain at least 4 characters" }),
+    passwordConfirm: z.string({ error: "Repeat your chosen password" }).min(1, { error: "Repeat your chosen password" }),
+}).refine((item) => item.password === item.passwordConfirm, {
+    message: "Repeat your chosen password",
+    path: ["passwordConfirm"],
+});

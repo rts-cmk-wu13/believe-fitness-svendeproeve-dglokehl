@@ -2,41 +2,23 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { getMenuItems } from "@/utils/helpers";
 import { LuAlignRight, LuX } from "react-icons/lu";
 
 type BurgerMenuProps = {
+    isLoggedIn?: boolean;
     className?: string;
 }
 
-const menuItems = [
-    {
-        href: "/",
-        body: "Home",
-    },
-    {
-        href: "/classes",
-        body: "Popular Classes",
-    },
-    {
-        href: "/search",
-        body: "Search",
-    },
-    {
-        href: "/profile",
-        body: "My Profile",
-    },
-    {
-        href: "/auth/signout",
-        body: "Log Out",
-    },
-]
-
-export default function BurgerMenu({ className }: BurgerMenuProps) {
+export default function BurgerMenu({ isLoggedIn, className }: BurgerMenuProps) {
     const [open, setOpen] = useState(false);
 
     const handleMenu = () => {
         setOpen(!open)
     }
+
+    const menuItems = getMenuItems(isLoggedIn)
+
     return (
         <figure className={`*:first:size-6 *:first:hover-75 text-app-grey-medium ${className ? className : ""}`}>
             {!open ? <LuAlignRight onClick={handleMenu} /> : <LuX onClick={handleMenu} />}
