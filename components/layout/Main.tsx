@@ -5,7 +5,7 @@ type MainProps = {
 
 export default function Main({ children, className }: MainProps) {
     return (
-        <main className={`py-default *:px-default ${className ? className : ""}`}>
+        <main className={`mt-header py-default *:px-default ${className ? className : ""}`}>
             {children}
         </main>
     )

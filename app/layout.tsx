@@ -17,7 +17,7 @@ export const metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={`pb-footer bg-app-bg ${poppins.className}`}>
+            <body className={`bg-app-bg ${poppins.className}`}>
                 {children}
             </body>
         </html>

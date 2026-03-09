@@ -3,14 +3,19 @@ import Main from "./Main"
 
 type PageWrapperProps = {
     children: React.ReactNode;
-    className?: string;
+    header?: {
+        className?: string;
+    }
+    main?: {
+        className?: string;
+    }
 }
 
-export default function PageWrapper({ children, className }: PageWrapperProps) {
+export default function PageWrapper({ children, header, main }: PageWrapperProps) {
     return (
         <>
-            <Header />
-            <Main>
+            <Header className={header?.className} />
+            <Main className={main?.className}>
                 {children}
             </Main>
         </>

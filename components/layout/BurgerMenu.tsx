@@ -19,12 +19,16 @@ export default function BurgerMenu({ isLoggedIn, className }: BurgerMenuProps) {
 
     const menuItems = getMenuItems(isLoggedIn)
 
+    const iconStyle = "size-6 text-app-grey-medium hover-75"
+
     return (
-        <figure className={`*:first:size-6 *:first:hover-75 text-app-grey-medium ${className ? className : ""}`}>
-            {!open ? <LuAlignRight onClick={handleMenu} /> : <LuX onClick={handleMenu} />}
+        <>
+            {!open && <LuAlignRight className={iconStyle} onClick={handleMenu} />}
 
             {open && (
-                <nav className="pt-20 flex justify-center fixed inset-0 top-header z-9999 bg-app-bg text-app-black overflow-scroll">
+                <nav className="flex justify-center items-center fixed inset-0 z-9999 bg-app-bg text-app-black overflow-scroll">
+                    <LuX className={`${iconStyle} absolute z-99999 top-default right-default`} onClick={handleMenu} />
+
                     <menu className="flex flex-col items-center gap-12">
                         {menuItems.map((item, i: number) => (
                             <li key={i}>
@@ -36,6 +40,6 @@ export default function BurgerMenu({ isLoggedIn, className }: BurgerMenuProps) {
                     </menu>
                 </nav>
             )}
-        </figure>
+        </>
     )
 }

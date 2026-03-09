@@ -9,7 +9,7 @@ type HeaderProps = {
 export default async function Header({ className }: HeaderProps) {
     const token = await getToken()
     return (
-        <header className={`px-default h-header flex justify-between items-center gap-4 fixed top-0 inset-x-0 z-99999 ${className ? className : ""}`}>
+        <header className={`px-default h-header flex justify-between items-center gap-4 fixed top-0 inset-x-0 z-9999 pointer-events-none *:pointer-events-auto ${className ? className : ""}`}>
             <HeaderBack />
             <BurgerMenu isLoggedIn={token ? true : false} />
         </header>

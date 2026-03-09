@@ -6,6 +6,7 @@ import * as z from "zod";
 import { LoginSchema, SignupSchema } from "./schemas"
 import type { FormState } from "./types";
 
+// ---------- AUTH ---------- //
 
 export async function authLogin(initialState: FormState, formData: FormData): Promise<FormState> {
     // console.log("authLogin called")
