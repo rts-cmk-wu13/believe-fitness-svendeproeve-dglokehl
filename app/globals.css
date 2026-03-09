@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+    --spacing-default: 1.25rem;
+
+    --spacing-header: 3.75rem;
+    --height-header: 3.75rem;
+
+    --breakpoint-xs: 32rem;
+    --breakpoint-2xs: 25rem;
+    --breakpoint-3xs: 22.5rem;
+    --breakpoint-4xs: 18.75rem;
+
+    --text-2xs: 0.625rem;
+
+    --color-app-white: #FFFFFF;
+    --color-app-grey-light: #D4D4D4;
+    --color-app-grey-medium: #9E9E9E;
+    --color-app-grey-dark: #707070;
+    --color-app-black: #000000;
+
+    --color-app-bg: var(--color-app-white);
+    --color-app-text: var(--color-app-black);
+    --color-app-yellow: #F1C40E;
+
+    --shadow-button: 3px 4px 4px 0 #00000040;
+}
+
+:root {
+    background-color: var(--color-app-bg);
+    color: var(--color-app-text);
+}
+
+@utility height-minus-header {
+    @apply h-[calc(100dvh-var(--height-header))];
+}
+
+
+/* --- HOVER UTILITIES --- */
+
+@utility hover-none {
+    @apply cursor-pointer select-none duration-75;
+}
+
+@utility hover-75 {
+    @apply cursor-pointer select-none duration-75 hover:opacity-75;
+}
+
+@utility hover-bg-10 {
+    @apply cursor-pointer select-none duration-75 hover:bg-white/10;
+}
+
+@utility hover-scale-105 {
+    @apply cursor-pointer select-none duration-75 hover:scale-105;
+}
