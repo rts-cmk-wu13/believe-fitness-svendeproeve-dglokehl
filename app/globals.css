@@ -35,6 +35,10 @@
     @apply h-[calc(100dvh-var(--height-header))];
 }
 
+@utility scrollbar-hidden {
+    @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
+
 @utility form-input {
     @apply px-5 h-12 w-full bg-app-white border border-app-grey-medium rounded-3xl placeholder:text-app-grey-medium focus:outline-0 focus:border-app-black;
 }

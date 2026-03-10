@@ -3,14 +3,18 @@ import HeaderBack from "./HeaderBack";
 import BurgerMenu from "./BurgerMenu";
 
 type HeaderProps = {
+    title?: string;
     className?: string;
 }
 
-export default async function Header({ className }: HeaderProps) {
+export default async function Header({ title, className }: HeaderProps) {
     const token = await getToken()
     return (
         <header className={`px-default h-header flex justify-between items-center gap-4 fixed top-0 inset-x-0 z-9999 pointer-events-none *:pointer-events-auto ${className ? className : ""}`}>
-            <HeaderBack />
+            <div className="flex items-center">
+                <HeaderBack />
+                {title && <p className="text-2xl">{title}</p>}
+            </div>
             <BurgerMenu isLoggedIn={token ? true : false} />
         </header>
     )

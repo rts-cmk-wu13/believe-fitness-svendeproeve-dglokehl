@@ -1,3 +1,5 @@
+import type { FitnessClassRating } from "@/app/api/types"
+
 export function getMenuItems(isLoggedIn?: boolean) {
     let menuItems = [
         {
@@ -25,4 +27,14 @@ export function getMenuItems(isLoggedIn?: boolean) {
     })
 
     return menuItems
+}
+
+
+export function formatRatings(ratings: FitnessClassRating[]) {
+    let sum = 0
+    for (let i = 0; i < ratings.length; i++) {
+        sum += ratings[i].rating
+    }
+    const result = sum / ratings.length
+    return result
 }
