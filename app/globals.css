@@ -36,7 +36,11 @@
 }
 
 @utility form-input {
-    @apply px-5 h-12 w-full bg-app-white border border-app-grey-medium rounded-full placeholder:text-app-grey-medium focus:outline-0 focus:border-app-black;
+    @apply px-5 h-12 w-full bg-app-white border border-app-grey-medium rounded-3xl placeholder:text-app-grey-medium focus:outline-0 focus:border-app-black;
+}
+
+@utility form-input-textarea {
+    @apply form-input p-5;
 }
 
 

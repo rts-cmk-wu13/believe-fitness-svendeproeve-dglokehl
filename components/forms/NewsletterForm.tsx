@@ -2,18 +2,11 @@
 
 import { useActionState } from "react";
 import Form from "next/form";
-import Link from "next/link";
-import FormInput from "./FormInput";
 import Button from "../buttons/Button";
 import { registerNewsletter } from "@/app/api/actions";
 import type { FormState } from "@/app/api/types";
 
-type NewsletterFormProps = {
-    children?: React.ReactNode;
-    className?: string;
-}
-
-export default function NewsletterForm({ className }: NewsletterFormProps) {
+export default function NewsletterForm() {
     const initialState: FormState = {
         message: "",
         errors: {

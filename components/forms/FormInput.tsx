@@ -5,7 +5,7 @@ type FormInputProps = {
 }
 
 export default function FormInput({ children, error, className }: FormInputProps) {
-    console.log("error:", error)
+    // console.log("error:", error)
     return (
         <div className={`${className ? className : ""}`}>
             {children}

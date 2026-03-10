@@ -21,3 +21,10 @@ export const SignupSchema = z.object({
 export const NewsletterSchema = z.object({
     email: z.email({ error: "Enter a valid email" }),
 });
+
+
+export const ContactSchema = z.object({
+    name: z.string({ error: "Enter your name" }).min(1, { error: "Enter your name" }),
+    email: z.email({ error: "Enter your email" }),
+    message: z.string({ error: "Enter a message" }).min(1, { error: "Enter a message" }),
+});

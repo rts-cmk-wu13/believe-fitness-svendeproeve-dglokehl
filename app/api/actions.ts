@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import * as z from "zod";
-import { LoginSchema, SignupSchema, NewsletterSchema } from "./schemas"
+import { LoginSchema, SignupSchema, NewsletterSchema, ContactSchema } from "./schemas"
 import type { FormState } from "./types";
 
 
@@ -132,6 +132,54 @@ export async function registerNewsletter(initialState: FormState, formData: Form
 
     return {
         message: "Thank you for signing up for our newsletter",
+        errors: {
+            fieldErrors: {
+                email: []
+            }
+        },
+        inputs: {
+            email: "",
+        }
+    }
+}
+
+
+export async function sendContactMessage(initialState: FormState, formData: FormData): Promise<FormState> {
+    // console.log("registerNewsletter called")
+
+    const formObject = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        message: formData.get("message"),
+    }
+
+    const result = ContactSchema.safeParse(formObject)
+    if (!result.success) return {
+        errors: z.flattenError(result.error),
+        inputs: formObject,
+    }
+    // console.log("result.data:", result.data)
+
+    const res = await fetch("http://localhost:4000/api/v1/messages", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formObject)
+    });
+    if (!res.ok) return {
+        message: `${res.status}: ${res.statusText}`,
+        errors: {
+            fieldErrors: {}
+        },
+        inputs: formObject,
+    }
+
+    const data = await res.json();
+    // console.log("data:", data)
+
+    return {
+        message: "Thank you for contacting us, we will answer your message ASAP!",
         errors: {
             fieldErrors: {
                 email: []
