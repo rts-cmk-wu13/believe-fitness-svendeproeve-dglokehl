@@ -2,7 +2,6 @@
 
 import { useActionState } from "react";
 import Form from "next/form";
-import Button from "../buttons/Button";
 import { registerNewsletter } from "@/app/api/actions";
 import type { FormState } from "@/app/api/types";
 
@@ -37,8 +36,8 @@ export default function NewsletterForm() {
                     defaultValue={state.inputs.email}
                     className="form-input flex-1"
                 />
-                
-                <Button className={`px-6 block ${pending && "opacity-50 pointer-events-none"}`}>Sign Up</Button>
+
+                <button disabled={pending} className="button-app-default px-6 block">Sign Up</button>
             </div>
 
             {state.message && <p className={`mt-1 text-sm font-medium text-center ${state.errors.fieldErrors.email[0] ? "text-red-400" : "text-green-400"}`}>{state.message}</p>}

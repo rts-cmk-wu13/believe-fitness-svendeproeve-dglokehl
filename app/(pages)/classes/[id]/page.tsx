@@ -2,7 +2,6 @@ import { fetchNoCache } from "@/app/api/fetches";
 import type { FitnessClass, FitnessClassRating } from "@/app/api/types";
 import PageWrapper from "@/components/layout/PageWrapper";
 import FitnessClassStarRating from "@/components/FitnessClassStarRating";
-import Button from "@/components/buttons/Button";
 import RateButton from "@/components/buttons/RateButton";
 import { getUserId } from "@/utils/cookies";
 

@@ -3,7 +3,6 @@
 import { useActionState } from "react";
 import Form from "next/form";
 import FormInput from "./FormInput";
-import Button from "../buttons/Button";
 import { sendContactMessage } from "@/app/api/actions";
 import type { FormState } from "@/app/api/types";
 
@@ -62,7 +61,7 @@ export default function ContactForm() {
                 </FormInput>
 
                 {state.message && <p className="mt-1 text-sm font-medium text-center text-green-400">{state.message}</p>}
-                <Button className={`h-12 w-full ${pending && "opacity-50 pointer-events-none"}`}>Send Message</Button>
+                <button disabled={pending} className="button-app-default h-12 w-full">Send Message</button>
             </Form>
         </section>
     )

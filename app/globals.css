@@ -62,7 +62,7 @@
 /* --- STYLE UTILITIES --- */
 
 @utility button-app-default {
-    @apply py-3 inline-block text-sm font-semibold text-center bg-app-yellow text-app-black border-0 uppercase rounded-3xl hover-75;
+    @apply py-3 inline-block text-sm font-semibold text-center bg-app-yellow text-app-black border-0 uppercase rounded-3xl hover-75 disabled:pointer-events-none disabled:opacity-50;
 }
 
 @utility button-app-transparent {

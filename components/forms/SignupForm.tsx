@@ -4,7 +4,6 @@ import { useActionState } from "react";
 import Form from "next/form";
 import Link from "next/link";
 import FormInput from "./FormInput";
-import Button from "../buttons/Button";
 import { authSignup } from "@/app/api/actions";
 import type { FormState } from "@/app/api/types";
 
@@ -79,7 +78,7 @@ export default function SignupForm() {
             </FormInput>
 
             {state.message && <p className="mt-1 text-sm font-medium text-center text-red-400">{state.message}</p>}
-            <Button className={`h-12 w-full ${pending && "opacity-50 pointer-events-none"}`}>SIGN UP</Button>
+            <button disabled={pending} className="button-app-default h-12 w-full">Sign Up</button>
 
             <p className="text-sm text-app-grey-medium text-center">
                 Are you already a Believer?<br /><Link href="/login" className="underline">Log in here</Link> and start training like a pro.
