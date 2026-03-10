@@ -23,7 +23,7 @@ export default function SignupForm() {
     }
 
     const [state, formAction, pending] = useActionState(authSignup, initialState)
-    console.log("state:", state)
+    // console.log("state:", state)
 
     return (
         <Form

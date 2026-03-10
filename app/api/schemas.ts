@@ -1,5 +1,7 @@
 import * as z from "zod";
 
+// ---------- AUTH ---------- //
+
 export const LoginSchema = z.object({
     username: z.string({ error: "Enter your username" }).min(1, { error: "Enter your username" }),
     password: z.string({ error: "Enter your password" }).min(1, { error: "Enter your password" }),
@@ -17,11 +19,11 @@ export const SignupSchema = z.object({
 });
 
 
+// ---------- ACTIONS ---------- //
 
 export const NewsletterSchema = z.object({
     email: z.email({ error: "Enter a valid email" }),
 });
-
 
 export const ContactSchema = z.object({
     name: z.string({ error: "Enter your name" }).min(1, { error: "Enter your name" }),

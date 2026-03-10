@@ -31,14 +31,6 @@
     color: var(--color-app-text);
 }
 
-@utility height-minus-header {
-    @apply h-[calc(100dvh-var(--height-header))];
-}
-
-@utility scrollbar-hidden {
-    @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
-}
-
 
 /* --- HOVER UTILITIES --- */
 
@@ -61,12 +53,16 @@
 
 /* --- STYLE UTILITIES --- */
 
+@utility button-app {
+    @apply py-3 inline-block text-sm font-semibold text-center uppercase rounded-3xl hover-75 disabled:pointer-events-none disabled:opacity-50;
+}
+
 @utility button-app-default {
-    @apply py-3 inline-block text-sm font-semibold text-center bg-app-yellow text-app-black border-0 uppercase rounded-3xl hover-75 disabled:pointer-events-none disabled:opacity-50;
+    @apply button-app bg-app-yellow text-app-black border-0;
 }
 
 @utility button-app-transparent {
-    @apply py-3 inline-block text-sm font-semibold text-center border-2 border-app-yellow text-app-yellow uppercase rounded-3xl hover-75;
+    @apply button-app border-2 border-app-yellow text-app-yellow;
 }
 
 @utility form-input {
@@ -75,4 +71,11 @@
 
 @utility form-input-textarea {
     @apply form-input p-5;
+}
+
+
+/* --- OTHER UTILITIES --- */
+
+@utility scrollbar-hidden {
+    @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
 }

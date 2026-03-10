@@ -20,7 +20,7 @@ export default function ContactForm() {
     }
 
     const [state, formAction, pending] = useActionState(sendContactMessage, initialState)
-    console.log("state:", state)
+    // console.log("state:", state)
 
     return (
         <section className="space-y-3">

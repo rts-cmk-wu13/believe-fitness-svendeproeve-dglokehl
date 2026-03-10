@@ -1,3 +1,12 @@
+export type FormState = {
+    message?: string;
+    errors?: any
+    inputs?: any
+}
+
+
+// ---------- 1 ---------- //
+
 export type Asset = {
     id: number;
     url: string;
@@ -13,15 +22,8 @@ export type Trainer = {
     assetId: number;
 }
 
-export type FitnessClassRating = {
-    id: number;
-    classId: number;
-    userId: number;
-    rating: number;
-    createdAt: string;
-    updatedAt: string;
-}
 
+// ---------- 2 ---------- //
 
 export type NewsArticle = {
     id: number;
@@ -29,7 +31,6 @@ export type NewsArticle = {
     text: string;
     createdAt: string;
     updatedAt: string;
-    trainer: Trainer;
     assetId: number;
     asset: Asset;
 }
@@ -44,13 +45,16 @@ export type FitnessClass = {
     createdAt: string;
     updatedAt: string;
     trainerId: number;
+    trainer: Trainer;
     assetId: number;
     asset: Asset;
 }
 
-
-export type FormState = {
-    message?: string;
-    errors?: any
-    inputs?: any
+export type FitnessClassRating = {
+    id: number;
+    classId: number;
+    userId: number;
+    rating: number;
+    createdAt: string;
+    updatedAt: string;
 }
