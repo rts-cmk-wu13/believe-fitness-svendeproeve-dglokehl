@@ -4,7 +4,9 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import * as z from "zod";
 import { LoginSchema, SignupSchema, NewsletterSchema, ContactSchema } from "./schemas"
-import type { FormState } from "./types";
+import type { FormState, FitnessClassRating } from "./types";
+import { fetchNoCache } from "./fetches";
+import { getToken, getUserId } from "@/utils/cookies";
 
 
 // ---------- AUTH ---------- //
@@ -44,7 +46,7 @@ export async function authLogin(initialState: FormState, formData: FormData): Pr
 
     const cookieStore = await cookies()
     cookieStore.set("BF_TOKEN", data.token, { expires: data.validUntil })
-    // cookieStore.set("BF_USER_ID", data.userId, { expires: data.validUntil })
+    cookieStore.set("BF_USER_ID", data.userId, { expires: data.validUntil })
     // cookieStore.set("BF_USER_ROLE", data.role, { expires: data.validUntil })
 
     redirect("/")
@@ -189,4 +191,38 @@ export async function sendContactMessage(initialState: FormState, formData: Form
             email: "",
         }
     }
+}
+
+
+export async function addUserRating(classId: number, rating: number) {
+    console.log("addUserRating called")
+
+    const token = await getToken()
+    if (!token) return
+    const userId = await getUserId()
+    if (!userId) return
+
+    const formObject = {
+        userId: userId,
+        rating: rating,
+    }
+
+    // const ratings: FitnessClassRating[] = await fetchNoCache(`http://localhost:4000/api/v1/classes/${classId}/ratings`)
+    // console.log("ratings:", ratings)
+    // if (ratings.some((rating) => rating.userId == Number(userId))) return
+
+    const res = await fetch(`http://localhost:4000/api/v1/classes/${classId}/ratings`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(formObject)
+    });
+    if (!res.ok) return
+
+    const data = await res.json();
+    console.log("data:", data)
+
+    return data
 }
