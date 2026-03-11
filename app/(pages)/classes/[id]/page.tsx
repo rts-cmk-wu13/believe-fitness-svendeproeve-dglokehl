@@ -5,6 +5,7 @@ import FitnessClassStarRating from "@/components/FitnessClassStarRating";
 import RateButton from "@/components/buttons/RateButton";
 import { getUserId, getUserRole } from "@/utils/cookies";
 import SignupButton from "@/components/buttons/SignupButton";
+import TrainerCard from "@/components/cards/TrainerCard";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
@@ -24,8 +25,6 @@ export default async function ClassDetailsPage({ params }: { params: Promise<{ i
 
     const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)
     console.log("fitnessClass:", fitnessClass)
-    const trainerImage: Asset = await fetchNoCache(`http://localhost:4000/api/v1/assets/${fitnessClass.trainer.assetId}`)
-    // console.log("trainerImage:", trainerImage)
 
     const ratings: FitnessClassRating[] = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}/ratings`)
     // console.log("ratings:", ratings)
@@ -59,10 +58,7 @@ export default async function ClassDetailsPage({ params }: { params: Promise<{ i
 
                 <section className="space-y-4">
                     <h2 className="text-xl font-bold">Trainer</h2>
-                    <div className="flex items-center gap-5">
-                        <img src={trainerImage.url} alt="" className="size-22 rounded-2xl object-cover" />
-                        <p className="font-semibold">{fitnessClass.trainer.trainerName}</p>
-                    </div>
+                    <TrainerCard trainer={fitnessClass.trainer} />
                     <SignupButton className="button-app-default w-full" isSignedUp={isSignedUp} userRole={userRole} classId={fitnessClass.id} />
                 </section>
             </div>

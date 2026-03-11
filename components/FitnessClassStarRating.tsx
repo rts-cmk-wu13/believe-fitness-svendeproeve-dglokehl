@@ -11,7 +11,7 @@ type FitnessClassStarRatingProps = {
 
 export default async function FitnessClassStarRating({ classId, withText, className }: FitnessClassStarRatingProps) {
     const ratings: FitnessClassRating[] = await fetchNoCache(`http://localhost:4000/api/v1/classes/${classId}/ratings`)
-    console.log("ratings:", ratings)
+    // console.log("ratings:", ratings)
 
     const avgRating = formatRatings(ratings)
 

@@ -2,27 +2,23 @@ import PageWrapper from "@/components/layout/PageWrapper"
 import FitnessClassCard from "@/components/cards/FitnessClassCard"
 import { fetchNoCache } from "@/app/api/fetches"
 import type { FitnessClass } from "@/app/api/types"
+import FitnessClassOverviewSection from "@/components/sections/FitnessClassOverviewSection"
 
 export default async function ClassesPage() {
-    const classes: FitnessClass[] = await fetchNoCache("http://localhost:4000/api/v1/classes")
-    console.log("classes:", classes)
+    const fitnessClasses: FitnessClass[] = await fetchNoCache("http://localhost:4000/api/v1/classes")
+    console.log("fitnessClasses:", fitnessClasses)
 
-    const randNum = Math.floor(Math.random() * classes.length)
-    const randClass = classes[randNum]
-    console.log("randClass:", randClass)
+    const randNum = Math.floor(Math.random() * fitnessClasses.length)
+    const randFitnessClass = fitnessClasses[randNum]
+    console.log("randFitnessClass:", randFitnessClass)
 
     return (
         <PageWrapper header={{ title: "Popular classes" }} main={{ className: "space-y-12" }}>
             <div>
-                <FitnessClassCard fitnessClass={randClass} size="lg" />
+                <FitnessClassCard fitnessClass={randFitnessClass} size="lg" />
             </div>
 
-            <section className="px-0! *:not-last:px-default space-y-3">
-                <h2 className="text-xl font-bold">Classes for you</h2>
-                <div className="pl-default flex gap-4 overflow-x-scroll *:shrink-0 scrollbar-hidden *:last:mr-default">
-                    {classes.map((item, i: number) => <FitnessClassCard fitnessClass={item} key={i} />)}
-                </div>
-            </section>
+            <FitnessClassOverviewSection heading="Classes for you" fitnessClasses={fitnessClasses} />
         </PageWrapper>
     )
 }

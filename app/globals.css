@@ -53,6 +53,10 @@
 
 /* --- STYLE UTILITIES --- */
 
+@utility card-grid {
+    @apply grid grid-cols-1 3xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6;
+}
+
 @utility button-app {
     @apply py-3 inline-block text-sm font-semibold text-center uppercase rounded-3xl hover-75 disabled:pointer-events-none disabled:opacity-50;
 }
