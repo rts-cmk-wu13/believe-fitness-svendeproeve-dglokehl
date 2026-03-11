@@ -3,6 +3,7 @@ import Link from "next/link"
 import Splash1 from "@/assets/splash1.jpg"
 import Splash2 from "@/assets/splash2.jpg"
 import Logo from "@/components/branding/Logo"
+import SplashSessionButton from "@/components/buttons/SplashSessionButton"
 
 const imageArr = [
     {
@@ -34,9 +35,7 @@ export default async function SplashPage() {
             />
             <div className="w-full flex flex-col items-center gap-16 absolute bottom-12 z-1">
                 <Logo inverted className="self-start" />
-                <Link href="/" className="button-app-default px-7">
-                    START TRAINING
-                </Link>
+                <SplashSessionButton />
             </div>
         </>
     )

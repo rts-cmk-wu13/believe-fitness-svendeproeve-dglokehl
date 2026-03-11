@@ -110,6 +110,16 @@ export async function authLogout() {
 
 // ---------- ACTIONS ---------- //
 
+export async function setSplashSession() {
+    const cookieStore = await cookies()
+
+    if (cookieStore.has("BF_SESSION")) redirect("/")
+
+    cookieStore.set("BF_SESSION", "Session")
+    redirect("/")
+}
+
+
 export async function registerNewsletter(initialState: FormState, formData: FormData): Promise<FormState> {
     // console.log("registerNewsletter called")
 
