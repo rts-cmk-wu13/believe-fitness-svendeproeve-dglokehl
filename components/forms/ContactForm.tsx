@@ -56,7 +56,6 @@ export default function ContactForm() {
                         placeholder="Enter your message..."
                         defaultValue={state.inputs.message}
                         className="form-input-textarea h-32"
-
                     ></textarea>
                 </FormInput>
 

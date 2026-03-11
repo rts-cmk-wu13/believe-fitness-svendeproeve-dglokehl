@@ -1,9 +1,10 @@
 import { fetchNoCache } from "@/app/api/fetches";
-import type { FitnessClass, FitnessClassRating, Asset } from "@/app/api/types";
+import type { FitnessClass, FitnessClassRating, Asset, UserRole } from "@/app/api/types";
 import PageWrapper from "@/components/layout/PageWrapper";
 import FitnessClassStarRating from "@/components/FitnessClassStarRating";
 import RateButton from "@/components/buttons/RateButton";
-import { getUserId } from "@/utils/cookies";
+import { getUserId, getUserRole } from "@/utils/cookies";
+import SignupButton from "@/components/buttons/SignupButton";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
@@ -18,21 +19,22 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 export default async function ClassDetailsPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
+    const userId = await getUserId() as string
+    const userRole = await getUserRole() as UserRole
+
     const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)
     console.log("fitnessClass:", fitnessClass)
+    const trainerImage: Asset = await fetchNoCache(`http://localhost:4000/api/v1/assets/${fitnessClass.trainer.assetId}`)
+    // console.log("trainerImage:", trainerImage)
 
     const ratings: FitnessClassRating[] = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}/ratings`)
     // console.log("ratings:", ratings)
 
-    const userId = await getUserId()
+    const isSignedUp = fitnessClass.users.some((user) => user.id == Number(userId))
 
     let userRating
     const hasRated = ratings.find((rating) => rating.userId == Number(userId))
-    // console.log("hasRated:", hasRated)
     if (hasRated) userRating = hasRated.rating
-
-    const trainerImage: Asset = await fetchNoCache(`http://localhost:4000/api/v1/assets/${fitnessClass.trainer.assetId}`)
-    console.log("trainerImage:", trainerImage)
 
     return (
         <PageWrapper main={{ className: "mt-0! pt-0! pb-10 space-y-4" }}>
@@ -42,7 +44,7 @@ export default async function ClassDetailsPage({ params }: { params: Promise<{ i
 
                     <div className="flex justify-between items-end">
                         <FitnessClassStarRating classId={Number(id)} withText />
-                        <RateButton fitnessClass={fitnessClass} userRating={userRating} />
+                        {userRole === "default" && <RateButton fitnessClass={fitnessClass} userRating={userRating} />}
                     </div>
                 </div>
 
@@ -51,7 +53,7 @@ export default async function ClassDetailsPage({ params }: { params: Promise<{ i
 
             <div className="space-y-9">
                 <div className="space-y-4">
-                    <p className="font-medium">{fitnessClass.classDay} - {fitnessClass.classTime}</p>
+                    <p className="font-medium capitalize">{fitnessClass.classDay} - {fitnessClass.classTime}</p>
                     <p>{fitnessClass.classDescription}</p>
                 </div>
 
@@ -61,7 +63,7 @@ export default async function ClassDetailsPage({ params }: { params: Promise<{ i
                         <img src={trainerImage.url} alt="" className="size-22 rounded-2xl object-cover" />
                         <p className="font-semibold">{fitnessClass.trainer.trainerName}</p>
                     </div>
-                    <button className="button-app-default w-full">Sign Up</button>
+                    <SignupButton className="button-app-default w-full" isSignedUp={isSignedUp} userRole={userRole} classId={fitnessClass.id} />
                 </section>
             </div>
         </PageWrapper>

@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import HeroImage from "@/assets/hero.jpg"
 import { getToken } from "@/utils/cookies";
+import HeroImage from "@/assets/hero.jpg"
+import LogoutButton from "../buttons/LogoutButton";
 
 type HeroProps = {
     className?: string;
@@ -16,7 +17,7 @@ export default async function Hero({ className }: HeroProps) {
                 <h1 className="text-4xl font-bold text-app-yellow">Welcome to<br />Believe Fitness</h1>
                 <div className="flex gap-3 *:px-6 *:button-app-default">
                     <Link href="/classes">Classes</Link>
-                    <Link href={!token ? "/login" : "/logout"}>{!token ? "Log In" : "Log Out"}</Link>
+                    {!token ? <Link href="/login">Log In</Link> : <LogoutButton />}
                 </div>
             </div>
 

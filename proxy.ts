@@ -22,7 +22,7 @@ export async function proxy(request: NextRequest) {
         (request.nextUrl.pathname.startsWith("/classes/") && request.nextUrl.pathname.endsWith("/delete")) ||
         (request.nextUrl.pathname.startsWith("/classes/") && request.nextUrl.pathname.endsWith("/participants"))
     ) {
-        if (!token) return
-        if (userRole !== "instructor") return NextResponse.redirect(new URL("/", request.url))
+        if (!token) return NextResponse.redirect(new URL("/", request.url))
+        if (userRole !== "admin") return NextResponse.redirect(new URL("/", request.url))
     }
 }

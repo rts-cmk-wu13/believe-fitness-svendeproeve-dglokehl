@@ -22,6 +22,8 @@ export type Trainer = {
     assetId: number;
 }
 
+export type UserRole = "default" | "admin"
+
 
 // ---------- 2 ---------- //
 
@@ -48,6 +50,7 @@ export type FitnessClass = {
     trainer: Trainer;
     assetId: number;
     asset: Asset;
+    users: User[];
 }
 
 export type FitnessClassRating = {
@@ -55,6 +58,18 @@ export type FitnessClassRating = {
     classId: number;
     userId: number;
     rating: number;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export type User = {
+    classes: FitnessClass[];
+    id: number;
+    userFirstName: string;
+    userLastName: string;
+    username: string;
+    password: string;
+    role: UserRole;
     createdAt: string;
     updatedAt: string;
 }

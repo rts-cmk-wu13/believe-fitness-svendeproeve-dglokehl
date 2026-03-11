@@ -30,3 +30,14 @@ export const ContactSchema = z.object({
     email: z.email({ error: "Enter your email" }),
     message: z.string({ error: "Enter a message" }).min(1, { error: "Enter a message" }),
 });
+
+
+export const FitnessClassSchema = z.object({
+    className: z.string({ error: "Enter a name" }).min(1, { error: "Enter a name" }),
+    classDescription: z.string({ error: "Enter a description" }).min(1, { error: "Enter a description" }),
+    classDay: z.enum(["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"], { error: "Choose a day" }),
+    classTime: z.iso.time({ precision: -1, error: "Enter a time" }),
+    trainerId: z.enum(["1", "2", "3", "4"], { error: "Choose a trainer" }),
+    maxParticipants: z.number({ error: "Enter a max for participants" }).min(1, { error: "Enter a max for participants" }),
+    file: z.file({ error: "Upload an image" }).min(1, { error: "Upload an image" }),
+});
