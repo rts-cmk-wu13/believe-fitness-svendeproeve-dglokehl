@@ -8,7 +8,7 @@ type SplashSessionButtonProps = {
 
 export default function SplashSessionButton({ className }: SplashSessionButtonProps) {
     return (
-        <button className={`button-app-default px-7 ${className ? className : ""}`} onClick={async () => setSplashSession()}>
+        <button className={`button-app-default px-7 animate-fadein ${className ? className : ""}`} onClick={async () => setSplashSession()}>
             Start Training
         </button>
     )

@@ -24,6 +24,18 @@
     --color-app-yellow: #F1C40E;
 
     --shadow-button: 3px 4px 4px 0 #00000040;
+
+    --animate-fadein: fadein 700ms ease-in;
+    @keyframes fadein {
+        0% {
+            scale: 120%;
+            opacity: 0%;
+        }
+        100% {
+            scale: 100%;
+            opacity: 100%;
+        }
+    }
 }
 
 :root {
@@ -58,7 +70,7 @@
 }
 
 @utility button-app {
-    @apply py-3 inline-block text-sm font-semibold text-center uppercase rounded-3xl hover-75 disabled:pointer-events-none disabled:opacity-50;
+    @apply py-3 inline-block text-sm font-semibold text-center uppercase rounded-3xl hover-scale-105 disabled:pointer-events-none disabled:opacity-50;
 }
 
 @utility button-app-default {
