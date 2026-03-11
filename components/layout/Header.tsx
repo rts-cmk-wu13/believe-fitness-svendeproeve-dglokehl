@@ -1,6 +1,6 @@
 import { getToken } from "@/utils/cookies";
 import BackArrow from "../buttons/BackArrow";
-import BurgerMenu from "./BurgerMenu";
+import BurgerMenuButton from "../buttons/BurgerMenuButton";
 
 type HeaderProps = {
     title?: string;
@@ -12,11 +12,11 @@ export default async function Header({ title, className }: HeaderProps) {
 
     return (
         <header className={`px-default h-header flex justify-between items-center gap-4 fixed top-0 inset-x-0 z-9999 pointer-events-none *:pointer-events-auto ${className ? className : ""}`}>
-            <div className="flex items-center">
+            <div className="flex items-center gap-6">
                 <BackArrow />
                 {title && <p className="text-2xl">{title}</p>}
             </div>
-            <BurgerMenu isLoggedIn={token ? true : false} />
+            <BurgerMenuButton isLoggedIn={token ? true : false}/>
         </header>
     )
 }

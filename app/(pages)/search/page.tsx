@@ -38,7 +38,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
     if (q) fitnessClassesFiltered = fitnessClasses.filter(filterFitnessClassesSearch)
 
     return (
-        <PageWrapper main={{ className: "space-y-10" }}>
+        <PageWrapper header={{ title: "Search" }} main={{ className: "space-y-10" }}>
             <SearchBar query={q} />
 
             {q ? (
