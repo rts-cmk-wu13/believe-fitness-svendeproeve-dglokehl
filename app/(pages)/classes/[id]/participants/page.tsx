@@ -1,5 +1,5 @@
-import { fetchNoCache } from "@/app/api/fetches";
-import { getToken, getUserId } from "@/utils/cookies"
+import { fetchNoCache, fetchNoCacheAuth } from "@/app/api/fetches";
+import { getUserId } from "@/utils/cookies"
 import type { FitnessClass, User } from "@/app/api/types";
 import { IoPerson } from "react-icons/io5";
 import PageWrapper from "@/components/layout/PageWrapper"
@@ -15,13 +15,12 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     }
 }
 
-export default async function EditClassPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function ParticipantsClassPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
-    const token = await getToken()
     const userId = await getUserId()
 
-    const user: User = await fetchNoCache(`http://localhost:4000/api/v1/users/${userId}`, token)
+    const user: User = await fetchNoCacheAuth(`http://localhost:4000/api/v1/users/${userId}`)
     console.log("user:", user)
 
     const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)

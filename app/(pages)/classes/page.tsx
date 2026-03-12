@@ -4,7 +4,11 @@ import { fetchNoCache } from "@/app/api/fetches"
 import type { FitnessClass } from "@/app/api/types"
 import FitnessClassOverviewSection from "@/components/sections/FitnessClassOverviewSection"
 
-export default async function ClassesPage() {
+export const metadata = {
+    title: "Classes"
+}
+
+export default async function ClassOverviewPage() {
     const fitnessClasses: FitnessClass[] = await fetchNoCache("http://localhost:4000/api/v1/classes")
     console.log("fitnessClasses:", fitnessClasses)
 

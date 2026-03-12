@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import Form from "next/form";
-import FormInput from "./FormInput";
+import InputWrapper from "./InputWrapper";
 import { sendContactMessage } from "@/app/api/actions";
 import type { FormState } from "@/app/api/types";
 
@@ -32,7 +32,7 @@ export default function ContactForm() {
                 noValidate
                 className="mt-6 space-y-4"
             >
-                <FormInput error={state.errors.fieldErrors.name}>
+                <InputWrapper error={state.errors.fieldErrors.name}>
                     <input
                         type="text"
                         name="name" id="name"
@@ -40,8 +40,8 @@ export default function ContactForm() {
                         defaultValue={state.inputs.name}
                         className="form-input"
                     />
-                </FormInput>
-                <FormInput error={state.errors.fieldErrors.email}>
+                </InputWrapper>
+                <InputWrapper error={state.errors.fieldErrors.email}>
                     <input
                         type="email"
                         name="email" id="email"
@@ -49,15 +49,15 @@ export default function ContactForm() {
                         defaultValue={state.inputs.email}
                         className="form-input"
                     />
-                </FormInput>
-                <FormInput error={state.errors.fieldErrors.message}>
+                </InputWrapper>
+                <InputWrapper error={state.errors.fieldErrors.message}>
                     <textarea
                         name="message" id="message"
                         placeholder="Enter your message..."
                         defaultValue={state.inputs.message}
                         className="form-input-textarea h-32"
                     ></textarea>
-                </FormInput>
+                </InputWrapper>
 
                 {state.message && <p className="mt-1 text-sm font-medium text-center text-green-400">{state.message}</p>}
                 <button disabled={pending} className="button-app-default h-12 w-full">Send Message</button>

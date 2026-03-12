@@ -1,16 +1,19 @@
-import { getToken, getUserId } from "@/utils/cookies"
-import { fetchNoCache } from "@/app/api/fetches"
+import { getUserId } from "@/utils/cookies"
+import { fetchNoCacheAuth } from "@/app/api/fetches"
 import type { User } from "@/app/api/types"
 import PageWrapper from "@/components/layout/PageWrapper"
 import UserCard from "@/components/cards/UserCard"
 import DefaultProfileOverview from "@/components/blocks/DefaultProfileOverview"
 import AdminProfileOverview from "@/components/blocks/AdminProfileOverview"
 
+export const metadata = {
+    title: "My Profile"
+}
+
 export default async function ProfilePage() {
-    const token = await getToken()
     const userId = await getUserId() as string
 
-    const user: User = await fetchNoCache(`http://localhost:4000/api/v1/users/${userId}`, token)
+    const user: User = await fetchNoCacheAuth(`http://localhost:4000/api/v1/users/${userId}`)
     console.log("user:", user)
 
     return (

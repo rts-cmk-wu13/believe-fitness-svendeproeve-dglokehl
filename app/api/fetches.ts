@@ -1,17 +1,8 @@
-export async function fetchRevalidate(url: string, revalidate?: number, token?: string) {
-    let options = { next: { revalidate: revalidate ? revalidate : 3600 } }
+import { getToken } from "@/utils/cookies"
 
-    if (token) {
-        options = {
-            next: { revalidate: revalidate ? revalidate : 3600 },
-            headers: {
-                "Authorization": `Bearer ${token}`,
-            },
-        }
-    }
-
+export async function fetchRevalidate(url: string, revalidate?: number) {
     try {
-        const res = await fetch(url, options)
+        const res = await fetch(url, { next: { revalidate: revalidate ? revalidate : 3600 } })
         if (!res.ok) throw new Error(res.statusText)
         return res.json()
     }
@@ -20,20 +11,45 @@ export async function fetchRevalidate(url: string, revalidate?: number, token?: 
     }
 }
 
-export async function fetchNoCache(url: string, token?: string) {
-    let options = { cache: "no-store" }
+export async function fetchRevalidateAuth(url: string, revalidate?: number) {
+    const token = await getToken()
+    try {
+        const res = await fetch(url, {
+            next: { revalidate: revalidate ? revalidate : 3600 },
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        })
+        if (!res.ok) throw new Error(res.statusText)
+        return res.json()
+    }
+    catch(error) {
+        console.error(`Failed to fetch - ${error}`)
+    }
+}
 
-    if (token) {
-        options = {
+
+export async function fetchNoCache(url: string) {
+    try {
+        const res = await fetch(url, { cache: "no-store" })
+        if (!res.ok) throw new Error(res.statusText)
+        return res.json()
+    }
+    catch(error) {
+        console.error(`Failed to fetch - ${error}`)
+    }
+}
+
+export async function fetchNoCacheAuth(url: string) {
+    const token = await getToken()
+
+    try {
+        const res = await fetch(url, {
             cache: "no-store",
             headers: {
                 "Authorization": `Bearer ${token}`,
             },
-        }
-    }
-
-    try {
-        const res = await fetch(url, options)
+        })
         if (!res.ok) throw new Error(res.statusText)
         return res.json()
     }

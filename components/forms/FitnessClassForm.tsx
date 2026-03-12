@@ -1,9 +1,9 @@
 "use client"
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import Form from "next/form";
 import type { FitnessClass, FormState } from "@/app/api/types";
-import FormInput from "./FormInput";
+import InputWrapper from "./InputWrapper";
 import { createFitnessClass, editFitnessClass } from "@/app/api/actions";
 
 type FitnessClassFormProps = {
@@ -25,11 +25,14 @@ export default function FitnessClassForm({ fitnessClass, className }: FitnessCla
             trainerId: fitnessClass?.trainerId ? fitnessClass.trainerId : "",
             maxParticipants: fitnessClass?.maxParticipants ? fitnessClass.maxParticipants : "",
             file: "",
+            assetId: "",
         }
     }
 
     const [state, formAction, pending] = useActionState(fitnessClass ? editFitnessClass : createFitnessClass, initialState)
     console.log("state:", state)
+
+    const [editImage, setEditImage] = useState(fitnessClass ? false : true);
 
     return (
         <Form
@@ -37,7 +40,7 @@ export default function FitnessClassForm({ fitnessClass, className }: FitnessCla
             noValidate
             className={`grid grid-cols-2 gap-4 *:col-span-2 ${className ? className : ""}`}
         >
-            <FormInput error={state.errors.fieldErrors.className}>
+            <InputWrapper error={state.errors.fieldErrors.className}>
                 <input
                     type="text"
                     name="className" id="className"
@@ -45,17 +48,17 @@ export default function FitnessClassForm({ fitnessClass, className }: FitnessCla
                     defaultValue={state.inputs.className}
                     className="form-input cols"
                 />
-            </FormInput>
-            <FormInput error={state.errors.fieldErrors.classDescription}>
+            </InputWrapper>
+            <InputWrapper error={state.errors.fieldErrors.classDescription}>
                 <textarea
                     name="classDescription" id="classDescription"
                     placeholder="Class description..."
                     defaultValue={state.inputs.classDescription}
                     className="form-input-textarea h-32"
                 ></textarea>
-            </FormInput>
+            </InputWrapper>
 
-            <FormInput error={state.errors.fieldErrors.classDay} className="col-span-1!">
+            <InputWrapper error={state.errors.fieldErrors.classDay} className="col-span-1!">
                 <select
                     name="classDay" id="classDay"
                     defaultValue={state.inputs.classDay}
@@ -70,8 +73,8 @@ export default function FitnessClassForm({ fitnessClass, className }: FitnessCla
                     <option value="saturday">Saturday</option>
                     <option value="sunday">Sunday</option>
                 </select>
-            </FormInput>
-            <FormInput error={state.errors.fieldErrors.classTime} className="col-span-1!">
+            </InputWrapper>
+            <InputWrapper error={state.errors.fieldErrors.classTime} className="col-span-1!">
                 <input
                     type="text"
                     name="classTime" id="classTime"
@@ -79,9 +82,9 @@ export default function FitnessClassForm({ fitnessClass, className }: FitnessCla
                     defaultValue={state.inputs.classTime}
                     className="form-input"
                 />
-            </FormInput>
+            </InputWrapper>
 
-            <FormInput error={state.errors.fieldErrors.trainerId}>
+            <InputWrapper error={state.errors.fieldErrors.trainerId}>
                 <select
                     name="trainerId" id="trainerId"
                     defaultValue={state.inputs.trainerId}
@@ -93,8 +96,8 @@ export default function FitnessClassForm({ fitnessClass, className }: FitnessCla
                     <option value="3">Michael Blake</option>
                     <option value="4">Khaled Al-Sadek</option>
                 </select>
-            </FormInput>
-            <FormInput error={state.errors.fieldErrors.maxParticipants}>
+            </InputWrapper>
+            <InputWrapper error={state.errors.fieldErrors.maxParticipants}>
                 <input
                     type="text"
                     name="maxParticipants" id="maxParticipants"
@@ -102,23 +105,33 @@ export default function FitnessClassForm({ fitnessClass, className }: FitnessCla
                     defaultValue={state.inputs.maxParticipants}
                     className="form-input"
                 />
-            </FormInput>
-            <FormInput className="space-y-2 text-app-grey-dark" error={state.errors.fieldErrors.file}>
-                <p className="text-lg">Choose an image:</p>
-                <input
-                    type="file"
-                    name="file" id="file"
-                    accept="image/*"
-                    className="w-full file:mr-2.5 file:py-1 file:px-2.5 file:bg-app-white file:border file:border-app-grey-dark file:rounded-sm file:hover-75"
-                />
-            </FormInput>
+            </InputWrapper>
 
+            {editImage && (
+                <InputWrapper className="space-y-2 text-app-grey-dark" error={state.errors.fieldErrors.file}>
+                    <p className="text-lg">Choose an image:</p>
+                    <input
+                        type="file"
+                        name="file" id="file"
+                        accept="image/*"
+                        className="w-full file:mr-2.5 file:py-1 file:px-2.5 file:bg-app-white file:border file:border-app-grey-dark file:rounded-sm file:hover-75"
+                    />
+                </InputWrapper>
+            )}
+
+            {fitnessClass && !editImage && (
+                <figure className="relative">
+                    <figcaption className="button-app-default px-5 absolute bottom-2 right-2" onClick={() => setEditImage(!editImage)}>Edit Image</figcaption>
+                    <img src={fitnessClass.asset.url} alt="Uploaded image for class" />
+                    <input type="hidden" name="assetId" id="assetId" value={fitnessClass.assetId} />
+                </figure>
+            )}
             {fitnessClass && (
                 <input type="hidden" name="classId" id="classId" value={fitnessClass.id} />
             )}
 
-            {state.message && <p className="mt-1 text-sm font-medium text-center text-red-400">{state.message}</p>}
-            <button disabled={pending} className="button-app-default h-12 w-full">Create Class</button>
+            {state.message && <p className={`mt-1 text-sm font-medium text-center ${Object.keys(state.errors.fieldErrors).length > 0 ? "text-red-400" : "text-green-400"}`}>{state.message}</p>}
+            <button disabled={pending} className="button-app-default h-12 w-full">{fitnessClass ? "Update Class" : "Create Class"}</button>
         </Form>
     )
 }

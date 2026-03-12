@@ -22,7 +22,7 @@ const menuItems = [
 
 export default function BurgerMenu({ isLoggedIn }: BurgerMenuProps) {
     return (
-        <nav className="flex justify-center items-center fixed inset-0 z-9999 bg-app-bg text-app-black overflow-scroll">
+        <nav className="flex justify-center items-center fixed inset-0 z-9999 bg-app-bg text-app-black">
             <menu className="flex flex-col items-center gap-12 text-2xl text-center *:*:hover-75">
                 {menuItems.map((item, i: number) => (
                     <li key={i}>

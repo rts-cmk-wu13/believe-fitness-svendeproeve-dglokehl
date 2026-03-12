@@ -1,6 +1,10 @@
-import Logo from "@/components/branding/Logo"
+import Logo from "@/components/blocks/Logo"
 import Main from "@/components/layout/Main"
 import SignupForm from "@/components/forms/SignupForm"
+
+export const metadata = {
+    title: "Sign up"
+}
 
 export default async function SignupPage() {
     return (

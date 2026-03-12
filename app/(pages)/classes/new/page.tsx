@@ -1,6 +1,10 @@
 import PageWrapper from "@/components/layout/PageWrapper"
 import FitnessClassForm from "@/components/forms/FitnessClassForm"
 
+export const metadata = {
+    title: "New class"
+}
+
 export default async function CreateClassPage() {
     return (
         <PageWrapper>

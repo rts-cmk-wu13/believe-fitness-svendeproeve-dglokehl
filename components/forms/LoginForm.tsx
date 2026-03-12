@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import Form from "next/form";
 import Link from "next/link";
-import FormInput from "./FormInput";
+import InputWrapper from "./InputWrapper";
 import { authLogin } from "@/app/api/actions";
 import type { FormState } from "@/app/api/types";
 
@@ -28,7 +28,7 @@ export default function LoginForm() {
             noValidate
             className="space-y-4"
         >
-            <FormInput error={state.errors.fieldErrors.username}>
+            <InputWrapper error={state.errors.fieldErrors.username}>
                 <input
                     type="text"
                     name="username" id="username"
@@ -36,8 +36,8 @@ export default function LoginForm() {
                     defaultValue={state.inputs.username}
                     className="form-input"
                 />
-            </FormInput>
-            <FormInput error={state.errors.fieldErrors.password}>
+            </InputWrapper>
+            <InputWrapper error={state.errors.fieldErrors.password}>
                 <input
                     type="password"
                     name="password" id="password"
@@ -45,7 +45,7 @@ export default function LoginForm() {
                     defaultValue={state.inputs.password}
                     className="form-input"
                 />
-            </FormInput>
+            </InputWrapper>
 
             {state.message && <p className="mt-1 text-sm font-medium text-center text-red-400">{state.message}</p>}
             <button disabled={pending} className="button-app-default h-12 w-full">Log In</button>

@@ -1,8 +1,7 @@
 import Image from "next/image"
-import Link from "next/link"
 import Splash1 from "@/assets/splash1.jpg"
 import Splash2 from "@/assets/splash2.jpg"
-import Logo from "@/components/branding/Logo"
+import Logo from "@/components/blocks/Logo"
 import SplashSessionButton from "@/components/buttons/SplashSessionButton"
 
 const imageArr = [

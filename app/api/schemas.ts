@@ -40,4 +40,8 @@ export const FitnessClassSchema = z.object({
     trainerId: z.enum(["1", "2", "3", "4"], { error: "Choose a trainer" }),
     maxParticipants: z.number({ error: "Enter a max for participants" }).min(1, { error: "Enter a max for participants" }),
     file: z.file({ error: "Upload an image" }).min(1, { error: "Upload an image" }),
-});
+})
+
+export const FitnessClassSchemaWithAssetId = FitnessClassSchema.extend({
+    assetId: z.string({ error: "Invalid assetId" }).min(1, { error: "Invalid assetId" })
+}).omit({ file: true })

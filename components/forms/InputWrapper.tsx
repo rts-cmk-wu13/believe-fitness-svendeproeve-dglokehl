@@ -1,10 +1,10 @@
-type FormInputProps = {
+type InputWrapperProps = {
     children: React.ReactNode;
     error?: string[];
     className?: string;
 }
 
-export default function FormInput({ children, error, className }: FormInputProps) {
+export default function InputWrapper({ children, error, className }: InputWrapperProps) {
     // console.log("error:", error)
     return (
         <div className={`${className ? className : ""}`}>

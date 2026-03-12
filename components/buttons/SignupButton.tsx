@@ -6,15 +6,16 @@ import { addUserToClass, removeUserFromClass } from "@/app/api/actions"
 
 type SignupButtonProps = {
     isSignedUp?: boolean;
+    isAllowed: boolean;
     userRole: UserRole;
     classId: number;
     className?: string;
 }
 
-export default function SignupButton({ isSignedUp, userRole, classId, className }: SignupButtonProps) {
+export default function SignupButton({ isSignedUp, isAllowed, userRole, classId, className }: SignupButtonProps) {
     return (
         <>
-            {userRole === "default" && (
+            {userRole === "default" && isAllowed && (
                 <button className={className && className} onClick={async () => !isSignedUp ? addUserToClass(classId) : removeUserFromClass(classId)}>
                     {!isSignedUp ? "Sign Up" : "Leave"}
                 </button>

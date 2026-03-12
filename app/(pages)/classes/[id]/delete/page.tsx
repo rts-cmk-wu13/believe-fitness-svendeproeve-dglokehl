@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     }
 }
 
-export default async function DleteClassPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function DeleteClassPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
     const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)

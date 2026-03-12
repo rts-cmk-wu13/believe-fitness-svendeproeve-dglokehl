@@ -1,6 +1,10 @@
-import Logo from "@/components/branding/Logo"
+import Logo from "@/components/blocks/Logo"
 import Main from "@/components/layout/Main"
 import LoginForm from "@/components/forms/LoginForm"
+
+export const metadata = {
+    title: "Log in"
+}
 
 export default async function LoginPage() {
     return (

@@ -4,7 +4,7 @@ import { redirect, } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import * as z from "zod";
-import { LoginSchema, SignupSchema, NewsletterSchema, ContactSchema, FitnessClassSchema } from "./schemas"
+import { LoginSchema, SignupSchema, NewsletterSchema, ContactSchema, FitnessClassSchema, FitnessClassSchemaWithAssetId } from "./schemas"
 import type { FormState } from "./types";
 import { getToken, getUserId } from "@/utils/cookies";
 
@@ -215,22 +215,19 @@ export async function sendContactMessage(initialState: FormState, formData: Form
 }
 
 
-export async function addUserRating(classId: number, rating: number) {
+export async function addUserRating(initialState: FormState, formData: FormData): Promise<FormState> {
     // console.log("addUserRating called")
 
+    const classId = formData.get("classId")
+    const rating = formData.get("rating")
+
     const token = await getToken()
-    if (!token) return
     const userId = await getUserId()
-    if (!userId) return
 
     const formObject = {
         userId: userId,
         rating: rating,
     }
-
-    // const ratings: FitnessClassRating[] = await fetchNoCache(`http://localhost:4000/api/v1/classes/${classId}/ratings`)
-    // console.log("ratings:", ratings)
-    // if (ratings.some((rating) => rating.userId == Number(userId))) return
 
     const res = await fetch(`http://localhost:4000/api/v1/classes/${classId}/ratings`, {
         method: "POST",
@@ -240,12 +237,14 @@ export async function addUserRating(classId: number, rating: number) {
         },
         body: JSON.stringify(formObject)
     });
-    if (!res.ok) return
+    if (!res.ok) return { message: "You already rated this class", errors: `${res.status}: ${res.statusText}` }
 
-    const data = await res.json();
-    console.log("data:", data)
+    // const data = await res.json();
+    // console.log("data:", data)
 
+    revalidatePath("/classes")
     revalidatePath(`/classes/${classId}`)
+    return { message: "Your rating has been saved" }
 }
 
 
@@ -380,7 +379,7 @@ export async function createFitnessClass(initialState: FormState, formData: Form
 export async function editFitnessClass(initialState: FormState, formData: FormData): Promise<FormState> {
     // console.log("createFitnessClass called")
 
-    const classId = formData.get("classId")
+    let assetId = formData.get("assetId")
 
     const formObject = {
         className: formData.get("className"),
@@ -390,20 +389,29 @@ export async function editFitnessClass(initialState: FormState, formData: FormDa
         trainerId: formData.get("trainerId"),
         maxParticipants: formData.get("maxParticipants") === "" ? "" : Number(formData.get("maxParticipants")),
         file: formData.get("file"),
+        assetId: assetId,
     }
 
-    const result = FitnessClassSchema.safeParse(formObject)
-    if (!result.success) return {
-        errors: z.flattenError(result.error),
-        inputs: formObject,
+    let newFormObject = {}
+    if (assetId) {
+        const result = FitnessClassSchemaWithAssetId.safeParse(formObject)
+        // console.log("result:", result)
+        if (!result.success) return {
+            errors: z.flattenError(result.error),
+            inputs: formObject,
+        }
+    } else {
+        const result = FitnessClassSchema.safeParse(formObject)
+        // console.log("result:", result)
+        if (!result.success) return {
+            errors: z.flattenError(result.error),
+            inputs: formObject,
+        }
+        assetId = await createAsset(result.data.file, formObject)
     }
     // console.log("result.data:", result.data)
 
-    const assetId = await createAsset(result.data.file, formObject)
-
-    const token = await getToken()
-
-    const newFormObject = {
+    newFormObject = {
         className: formObject.className,
         classDescription: formObject.classDescription,
         classDay: formObject.classDay,
@@ -412,6 +420,16 @@ export async function editFitnessClass(initialState: FormState, formData: FormDa
         maxParticipants: formObject.maxParticipants,
         assetId: assetId,
     }
+    // return {
+    //     message: "hej",
+    //     errors: {
+    //         fieldErrors: {}
+    //     },
+    //     inputs: newFormObject,
+    // }
+
+    const classId = formData.get("classId")
+    const token = await getToken()
 
     const res = await fetch(`http://localhost:4000/api/v1/classes/${classId}`, {
         method: "PUT",
@@ -426,12 +444,19 @@ export async function editFitnessClass(initialState: FormState, formData: FormDa
         errors: {
             fieldErrors: {}
         },
-        inputs: formObject,
+        inputs: newFormObject,
     }
 
     revalidatePath("/classes")
     revalidatePath("/profile")
-    redirect("/profile")
+    revalidatePath(`/classes/${classId}/edit`)
+    return {
+        message: "Class has been updated",
+        errors: {
+            fieldErrors: {}
+        },
+        inputs: newFormObject,
+    }
 }
 
 export async function deleteFitnessClass(classId: string) {

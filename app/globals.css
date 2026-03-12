@@ -93,3 +93,7 @@
 @utility scrollbar-hidden {
     @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
 }
+
+@utility icon-shadow {
+    filter: drop-shadow( 1px 1px 2px #00000080);
+}
