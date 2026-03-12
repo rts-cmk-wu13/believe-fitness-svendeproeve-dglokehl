@@ -6,11 +6,10 @@ import SignupButton from "../buttons/SignupButton";
 type ProfileFitnessClassCardProps = {
     fitnessClass: FitnessClass;
     userRole: UserRole;
-    userId: string;
     className?: string;
 }
 
-export default function ProfileFitnessClassCard({ fitnessClass, userRole, userId, className }: ProfileFitnessClassCardProps) {
+export default function ProfileFitnessClassCard({ fitnessClass, userRole, className }: ProfileFitnessClassCardProps) {
     console.log("fitnessClass:", fitnessClass)
 
     return (
@@ -22,7 +21,6 @@ export default function ProfileFitnessClassCard({ fitnessClass, userRole, userId
                 <div className="flex justify-between">
                     <Link href={`/classes/${fitnessClass.id}`} className="button-app-default px-6">Show Class</Link>
                     <SignupButton className="button-app-default px-6" isSignedUp userRole={userRole} classId={fitnessClass.id} />
-                    {/* <button className="button-app-default px-6">Leave</button> */}
                 </div>
             )}
             {userRole === "admin" && (
@@ -35,8 +33,8 @@ export default function ProfileFitnessClassCard({ fitnessClass, userRole, userId
                         <Link href={`/profile/classes/${fitnessClass.id}/participants`} className="button-app-default px-6">Participants</Link>
 
                         <div className="flex items-center gap-2.5">
-                            <Link href={`/profile/classes/${fitnessClass.id}/edit`} className="button-app-default size-12 p-3 *:size-full"><LuSquarePen /></Link>
-                            <Link href={`/profile/classes/${fitnessClass.id}/delete`} className="button-app-default size-12 p-3 *:size-full"><LuTrash /></Link>
+                            <Link href={`/classes/${fitnessClass.id}/edit`} className="button-app-default size-12 p-3 *:size-full"><LuSquarePen /></Link>
+                            <Link href={`/classes/${fitnessClass.id}/delete`} className="button-app-default size-12 p-3 *:size-full"><LuTrash /></Link>
                         </div>
                     </div>
                 </>

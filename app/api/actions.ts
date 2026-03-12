@@ -433,3 +433,21 @@ export async function editFitnessClass(initialState: FormState, formData: FormDa
     revalidatePath("/profile")
     redirect("/profile")
 }
+
+export async function deleteFitnessClass(classId: string) {
+    // console.log("deleteFitnessClass called")
+
+    const token = await getToken()
+
+    const res = await fetch(`http://localhost:4000/api/v1/classes/${classId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+    });
+    if (!res.ok) return
+
+    revalidatePath("/classes")
+    revalidatePath("/profile")
+    redirect("/profile")
+}
