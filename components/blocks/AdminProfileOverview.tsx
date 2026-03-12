@@ -13,7 +13,7 @@ export default async function AdminProfileOverview({ className }: AdminProfileOv
 
     return (
         <div className={`flex flex-col gap-4 ${className ? className : ""}`}>
-            {fitnessClasses.map((item, i: number) => <ProfileFitnessClassCard fitnessClass={item} userRole="admin" key={i} />)}
+            {fitnessClasses.map((item, i: number) => <ProfileFitnessClassCard classId={item.id} userRole="admin" key={i} />)}
             <Link href={`/classes/new`} className="button-app-default px-6 self-end">Add Class</Link>
         </div>
     )

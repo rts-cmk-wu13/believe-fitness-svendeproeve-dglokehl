@@ -2,14 +2,16 @@ import Link from "next/link";
 import type { FitnessClass, UserRole } from "@/app/api/types"
 import { LuSquarePen, LuTrash } from "react-icons/lu";
 import SignupButton from "../buttons/SignupButton";
+import { fetchNoCache } from "@/app/api/fetches";
 
 type ProfileFitnessClassCardProps = {
-    fitnessClass: FitnessClass;
+    classId: number;
     userRole: UserRole;
     className?: string;
 }
 
-export default function ProfileFitnessClassCard({ fitnessClass, userRole, className }: ProfileFitnessClassCardProps) {
+export default async function ProfileFitnessClassCard({ classId, userRole, className }: ProfileFitnessClassCardProps) {
+    const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${classId}`)
     console.log("fitnessClass:", fitnessClass)
 
     return (
@@ -20,17 +22,17 @@ export default function ProfileFitnessClassCard({ fitnessClass, userRole, classN
             {userRole === "default" && (
                 <div className="flex justify-between">
                     <Link href={`/classes/${fitnessClass.id}`} className="button-app-default px-6">Show Class</Link>
-                    <SignupButton className="button-app-default px-6" isSignedUp userRole={userRole} classId={fitnessClass.id} />
+                    <SignupButton className="button-app-default px-6" isSignedUp isAllowed={true} userRole={userRole} classId={fitnessClass.id} />
                 </div>
             )}
             {userRole === "admin" && (
                 <>
-                    <div>
+                    <div className="flex justify-between">
                         <p>Max. participants: {fitnessClass.maxParticipants}</p>
-                        {/* <p>Joined: {fitnessClass.users.length}</p> */}
+                        <p>Joined: {fitnessClass.users.length}</p>
                     </div>
                     <div className="flex justify-between items-center">
-                        <Link href={`/profile/classes/${fitnessClass.id}/participants`} className="button-app-default px-6">Participants</Link>
+                        <Link href={`/classes/${fitnessClass.id}/participants`} className="button-app-default px-6">Participants</Link>
 
                         <div className="flex items-center gap-2.5">
                             <Link href={`/classes/${fitnessClass.id}/edit`} className="button-app-default size-12 p-3 *:size-full"><LuSquarePen /></Link>

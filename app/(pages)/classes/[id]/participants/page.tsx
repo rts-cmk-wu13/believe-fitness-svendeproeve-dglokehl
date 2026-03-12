@@ -1,9 +1,9 @@
 import { fetchNoCache, fetchNoCacheAuth } from "@/app/api/fetches";
 import { getUserId } from "@/utils/cookies"
 import type { FitnessClass, User } from "@/app/api/types";
-import { IoPerson } from "react-icons/io5";
 import PageWrapper from "@/components/layout/PageWrapper"
 import UserCard from "@/components/cards/UserCard";
+import ParticipantCard from "@/components/cards/ParticipantCard";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
@@ -34,12 +34,7 @@ export default async function ParticipantsClassPage({ params }: { params: Promis
             <section className="mt-5 space-y-3">
                 <h2 className="font-semibold">Participants:</h2>
                 <div className="space-y-4">
-                    {fitnessClass.users.map((item, i: number) => (
-                        <article className="py-3 px-6 flex items-center gap-2.5 border border-app-black rounded-3xl" key={i}>
-                            <IoPerson className="size-5" />
-                            <p className="text-lg">{item.userFirstName} {item.userLastName}</p>
-                        </article>
-                    ))}
+                    {fitnessClass.users.map((item, i: number) => <ParticipantCard user={item} key={i} />)}
                 </div>
             </section>
         </PageWrapper>

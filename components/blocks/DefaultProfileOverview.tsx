@@ -9,7 +9,7 @@ type DefaultProfileOverviewProps = {
 export default function DefaultProfileOverview({ fitnessClasses, className }: DefaultProfileOverviewProps) {
     return (
         <div className={`flex flex-col gap-5 ${className ? className : ""}`}>
-            {fitnessClasses.map((item, i: number) => <ProfileFitnessClassCard fitnessClass={item} userRole="default" key={i} />)}
+            {fitnessClasses.map((item, i: number) => <ProfileFitnessClassCard classId={item.id} userRole="default" key={i} />)}
         </div>
     )
 }
