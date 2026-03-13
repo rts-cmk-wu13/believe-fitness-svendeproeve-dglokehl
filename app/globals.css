@@ -52,10 +52,6 @@
     @apply cursor-pointer select-none duration-75 pointer-fine:hover:opacity-75;
 }
 
-@utility hover-bg-10 {
-    @apply cursor-pointer select-none duration-75 pointer-fine:hover:bg-white/10;
-}
-
 @utility hover-scale-105 {
     @apply cursor-pointer select-none duration-75 pointer-fine:hover:scale-105;
 }
@@ -96,8 +92,4 @@
 
 @utility scrollbar-hidden {
     @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
-}
-
-@utility icon-shadow {
-    filter: drop-shadow( 1px 1px 2px #00000080);
 }
