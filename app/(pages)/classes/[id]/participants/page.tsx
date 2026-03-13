@@ -34,7 +34,13 @@ export default async function ParticipantsClassPage({ params }: { params: Promis
             <section className="mt-5 space-y-3">
                 <h2 className="font-semibold">Participants:</h2>
                 <div className="space-y-4">
-                    {fitnessClass.users.map((item, i: number) => <ParticipantCard user={item} key={i} />)}
+                    {fitnessClass.users.length > 0 ?
+                        fitnessClass.users.map((item, i: number) => <ParticipantCard user={item} key={i} />)
+                    : (
+                        <p className="text-sm text-app-grey-dark text-center">
+                            There's currently no users signed up for this class.
+                        </p>
+                    )}
                 </div>
             </section>
         </PageWrapper>

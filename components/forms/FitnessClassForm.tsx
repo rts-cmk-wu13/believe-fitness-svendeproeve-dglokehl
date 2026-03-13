@@ -62,7 +62,7 @@ export default function FitnessClassForm({ fitnessClass, className }: FitnessCla
                 <select
                     name="classDay" id="classDay"
                     defaultValue={state.inputs.classDay}
-                    className="form-input"
+                    className="form-input appearance-none"
                 >
                     <option value="" disabled>Class day...</option>
                     <option value="monday">Monday</option>
@@ -88,7 +88,7 @@ export default function FitnessClassForm({ fitnessClass, className }: FitnessCla
                 <select
                     name="trainerId" id="trainerId"
                     defaultValue={state.inputs.trainerId}
-                    className="form-input"
+                    className="form-input appearance-none"
                 >
                     <option value="" disabled>Class trainer...</option>
                     <option value="1">Davina Jones</option>
