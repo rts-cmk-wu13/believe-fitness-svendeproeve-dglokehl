@@ -11,19 +11,16 @@ type FitnessClassStarRatingProps = {
 
 export default async function FitnessClassStarRating({ classId, withText, className }: FitnessClassStarRatingProps) {
     const ratings: FitnessClassRating[] = await fetchNoCache(`http://localhost:4000/api/v1/classes/${classId}/ratings`)
-    // console.log("ratings:", ratings)
 
     const avgRating = getAvgRating(ratings)
 
     return (
         <div className={`*:size-3 flex items-center gap-1 ${className ? className : ""}`}>
-            {Array.from({ length: 5 }).map((item, i: number) => {
-                const starNumber = i + 1
-
-                if (avgRating >= starNumber) {
-                    return <FaStar key={i} />
+            {[1,2,3,4,5].map((star) => {
+                if (avgRating >= star) {
+                    return <FaStar key={star} />
                 } else {
-                    return <FaRegStar key={i} />
+                    return <FaRegStar key={star} />
                 }
             })}
             {withText && (

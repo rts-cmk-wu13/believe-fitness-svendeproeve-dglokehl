@@ -14,7 +14,7 @@ export default async function ClassOverviewPage() {
 
     const randNum = Math.floor(Math.random() * fitnessClasses.length)
     const randFitnessClass = fitnessClasses[randNum]
-    console.log("randFitnessClass:", randFitnessClass)
+    // console.log("randFitnessClass:", randFitnessClass)
 
     return (
         <PageWrapper header={{ title: "Popular classes" }} main={{ className: "space-y-12" }}>

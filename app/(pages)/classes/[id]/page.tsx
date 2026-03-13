@@ -35,7 +35,7 @@ export default async function ClassDetailsPage({ params }: { params: Promise<{ i
     
     const isSignedUp = fitnessClass.users.some((user) => user.id == Number(userId))
     const isAllowed = isAllowedToSignup(fitnessClass, user, isSignedUp)
-    console.log("isAllowed:", isAllowed)
+    // console.log("isAllowed:", isAllowed)
 
     const userRating = getUserRating(ratings, userId)
 

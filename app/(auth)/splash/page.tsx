@@ -19,7 +19,7 @@ const imageArr = [
 
 export default async function SplashPage() {
     const randNum = Math.random()
-    console.log("randNum:", randNum)
+    // console.log("randNum:", randNum)
 
     const randImage = randNum < 0.5 ? imageArr[0] : imageArr[1]
 

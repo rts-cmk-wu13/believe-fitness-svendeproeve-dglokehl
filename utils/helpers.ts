@@ -1,7 +1,7 @@
 import type { FitnessClassRating, FitnessClass, User } from "@/app/api/types"
 
 export function getAvgRating(ratings: FitnessClassRating[]) {
-    if (ratings.length < 1) return -1
+    if (ratings.length < 1) return 0
 
     let sum = 0
     for (let i = 0; i < ratings.length; i++) {

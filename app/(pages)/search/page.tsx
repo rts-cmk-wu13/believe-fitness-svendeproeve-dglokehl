@@ -26,6 +26,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
 
     function filterFitnessClassesSearch(fitnessClass: FitnessClass) {
         const query = q.toLowerCase().trim()
+
         const name = fitnessClass.className.toLowerCase().trim()
         const description = fitnessClass.classDescription.toLowerCase().trim()
         const day = fitnessClass.classDay.toLowerCase().trim()

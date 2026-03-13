@@ -1,17 +1,18 @@
 import Link from "next/link"
-import PageWrapper from "@/components/layout/PageWrapper"
-import Hero from "@/components/blocks/Hero"
 import { fetchRevalidate } from "../api/fetches"
 import type { NewsArticle } from "../api/types"
+import PageWrapper from "@/components/layout/PageWrapper"
+import Hero from "@/components/blocks/Hero"
+import NewsArticleCard from "@/components/cards/NewsArticleCard"
 import NewsletterForm from "@/components/forms/NewsletterForm"
 import TestimonialGallery from "@/components/blocks/TestimonialGallery"
 import ContactForm from "@/components/forms/ContactForm"
 
 export default async function HomePage() {
     const news = await fetchRevalidate("http://localhost:4000/api/v1/news")
-    console.log("news:", news)
+    // console.log("news:", news)
     const testimonials = await fetchRevalidate("http://localhost:4000/api/v1/testimonials")
-    console.log("testimonials:", testimonials)
+    // console.log("testimonials:", testimonials)
 
     return (
         <PageWrapper main={{ className: "mt-0! pt-0! pb-10 space-y-12" }}>
@@ -20,13 +21,7 @@ export default async function HomePage() {
             <section className="space-y-4">
                 <h2 className="text-6xl font-bold text-app-yellow">News</h2>
                 <div className="space-y-12">
-                    {news.map((item: NewsArticle, i: number) => (
-                        <article className="space-y-4" key={i}>
-                            <h3 className="text-2xl font-bold">{item.title}</h3>
-                            <img src={item.asset.url} alt={item.title} className="w-full h-50 object-cover" />
-                            <p>{item.text}</p>
-                        </article>
-                    ))}
+                    {news.map((item: NewsArticle, i: number) => <NewsArticleCard article={item} key={i} />)}
                 </div>
             </section>
 
