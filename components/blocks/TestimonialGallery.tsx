@@ -35,15 +35,17 @@ export default function TestimonialGallery({ testimonials, className }: Testimon
     }
 
     return (
-        <section className={`py-8 px-0! *:px-default min-h-85 flex justify-center items-center relative text-app-white text-center ${className ? className : ""}`}>
-            <div className="flex flex-col items-center gap-6 z-3">
+        <section className={`px-0! flex justify-center items-center relative text-app-white text-center ${className ? className : ""}`}>
+            <div className="py-8 px-default min-h-85 flex flex-col items-center gap-6 z-3">
                 <h3 className="text-2xl font-bold">A word from<br />other Believers</h3>
 
-                <div className="flex flex-col items-center gap-3">
-                    <p>{testimonials[index].text}</p>
-                    <p className="font-semibold">{testimonials[index].name}</p>
+                <div className="flex-1 flex flex-col justify-between items-center gap-3">
+                    <div className="space-y-2">
+                        <p>{testimonials[index].text}</p>
+                        <p className="font-semibold">{testimonials[index].name}</p>
+                    </div>
 
-                    <div className="flex gap-3 *:size-11 *:hover-75">
+                    <div className="flex gap-3 *:size-12 *:hover-75">
                         <IoChevronBackCircleOutline onClick={galleryPrev} />
                         <IoChevronForwardCircleOutline onClick={galleryNext} />
                     </div>

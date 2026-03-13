@@ -7,6 +7,7 @@ import * as z from "zod";
 import { LoginSchema, SignupSchema, NewsletterSchema, ContactSchema, FitnessClassSchema, FitnessClassSchemaWithAssetId } from "./schemas"
 import type { FormState } from "./types";
 import { getToken, getUserId } from "@/utils/cookies";
+import { fetchNoCache } from "./fetches";
 
 
 // ---------- AUTH ---------- //
@@ -135,6 +136,21 @@ export async function registerNewsletter(initialState: FormState, formData: Form
     }
     // console.log("result.data:", result.data)
 
+    const oldSignups = await fetchNoCache("http://localhost:4000/api/v1/newsletter")
+
+    const isSignedup = oldSignups.some((signup: any) => signup.email === formObject.email)
+    if (isSignedup) return {
+        message: "You're already signed up for our newsletter!",
+        errors: {
+            fieldErrors: {
+                email: ["Already signed up"]
+            }
+        },
+        inputs: {
+            email: formObject.email,
+        }
+    }
+
     const res = await fetch("http://localhost:4000/api/v1/newsletter", {
         method: "POST",
         headers: {
@@ -150,11 +166,11 @@ export async function registerNewsletter(initialState: FormState, formData: Form
         inputs: formObject,
     }
 
-    const data = await res.json();
+    // const data = await res.json();
     // console.log("data:", data)
 
     return {
-        message: "Thank you for signing up for our newsletter",
+        message: "Thank you for signing up for our newsletter!",
         errors: {
             fieldErrors: {
                 email: []
