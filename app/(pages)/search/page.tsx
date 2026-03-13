@@ -49,7 +49,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
                             {fitnessClassesFiltered.map((item, i: number) => <FitnessClassCard fitnessClass={item} size="md" key={i} />)}
                         </div>
                     ) : (
-                        <p className="text-sm text-app-grey-dark text-center">Your search did not give any results. Try to search for something else</p>
+                        <p className="text-sm text-app-grey-dark text-center">Your search did not give any results. Try to search for something else.</p>
                     )}
                 </>
             ) : (

@@ -5,6 +5,7 @@
 Visse steder har jeg valgt at tilføje noget funktionalitet som ikke nødvendigvis stod som et krav i opgaven, men som jeg følte var relativt åbenlyst at gøre. Her er de ting som jeg har tilføjet/ændret på:
 
 - Hvis man er logget ind som admin, bliver knappen til at tilmelde sig en klasse bliver ændret til at sige "Participants" og linker til siden med listen af deltagere, da jeg ikke synes at det giver mening at lade admin tilmelde sig sine egne klasser.
+- I figma-designet ligger participants-siden under profile-siden, men jeg syntes det gav mere mening at lægge den sammen med alle de andre sider der relaterede til klasser.
 - I figma-designet er der kun et felt til navn i sign up-formen, men da API'et bruger fornavn og efternavn til brugere, har jeg valgt at lave felter til både fornavn og efternavn.
 - I figma-designet ændrer ikonerne i headeren farve baseret på baggrunden, men der har jeg valgt at de bare er grå på alle sider, da det vil være ekstremt besværligt at få det til at ændre farve dynamisk og den grå farve vil kunne ses på de fleste baggrunde.
 - I figma-designet ligner det at man skal sætte sin rating med en slider, men jeg har valgt at gøre så man bare kan trykke på stjernerne for at vælge sin rating, da jeg synes det føles mere intuitivt. Det var til gengæld også en del mere besværligt at implementere.

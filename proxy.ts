@@ -18,9 +18,6 @@ export async function proxy(request: NextRequest) {
     if (request.nextUrl.pathname.startsWith("/login") || request.nextUrl.pathname.startsWith("/signup")) {
         if (token) return NextResponse.redirect(new URL("/", request.url))
     }
-    if (request.nextUrl.pathname.startsWith("/logout")) {
-        if (!token) return NextResponse.redirect(new URL("/login", request.url))
-    }
 
     if (request.nextUrl.pathname.startsWith("/profile")) {
         if (!token) return NextResponse.redirect(new URL("/login", request.url))

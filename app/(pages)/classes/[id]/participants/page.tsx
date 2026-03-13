@@ -27,7 +27,7 @@ export default async function ParticipantsClassPage({ params }: { params: Promis
     console.log("fitnessClass:", fitnessClass)
 
     return (
-        <PageWrapper header={{ title: "My Profile" }} main={{ className: "space-y-7" }}>
+        <PageWrapper header={{ title: "Participants" }} main={{ className: "space-y-7" }}>
             <UserCard user={user} />
             <h1 className="text-2xl font-semibold">{fitnessClass.className}</h1>
 
