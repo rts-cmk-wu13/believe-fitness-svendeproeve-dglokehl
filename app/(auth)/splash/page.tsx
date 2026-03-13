@@ -1,0 +1,41 @@
+import Image from "next/image"
+import Splash1 from "@/assets/splash1.jpg"
+import Splash2 from "@/assets/splash2.jpg"
+import Logo from "@/components/blocks/Logo"
+import SplashSessionButton from "@/components/buttons/SplashSessionButton"
+
+const imageArr = [
+    {
+        src: Splash1,
+        width: 410,
+        height: 812,
+    },
+    {
+        src: Splash2,
+        width: 375,
+        height: 812,
+    },
+]
+
+export default async function SplashPage() {
+    const randNum = Math.random()
+    // console.log("randNum:", randNum)
+
+    const randImage = randNum < 0.5 ? imageArr[0] : imageArr[1]
+
+    return (
+        <>
+            <Image
+                src={randImage.src}
+                alt="Background element"
+                width={randImage.width}
+                height={randImage.height}
+                className={`w-full h-dvh object-cover`}
+            />
+            <div className="wrapper-default w-full flex flex-col items-center gap-16 absolute bottom-12 inset-x-0 z-1">
+                <Logo inverted className="self-start" />
+                <SplashSessionButton />
+            </div>
+        </>
+    )
+}

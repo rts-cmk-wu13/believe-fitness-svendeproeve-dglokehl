@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+    --spacing-default: 1.25rem;
+
+    --spacing-header: 4rem;
+    --height-header: 4rem;
+
+    --breakpoint-xs: 32rem;
+    --breakpoint-2xs: 25rem;
+    --breakpoint-3xs: 22.5rem;
+    --breakpoint-4xs: 18.75rem;
+
+    --text-2xs: 0.625rem;
+
+    --color-app-white: #FFFFFF;
+    --color-app-grey-light: #D4D4D4;
+    --color-app-grey-medium: #9E9E9E;
+    --color-app-grey-dark: #707070;
+    --color-app-black: #000000;
+
+    --color-app-bg: var(--color-app-white);
+    --color-app-text: var(--color-app-black);
+    --color-app-yellow: #F1C40E;
+
+    --animate-fadein: fadein 700ms ease-in;
+    @keyframes fadein {
+        0% {
+            scale: 120%;
+            opacity: 0%;
+        }
+        100% {
+            scale: 100%;
+            opacity: 100%;
+        }
+    }
+}
+
+:root {
+    background-color: var(--color-app-bg);
+    color: var(--color-app-text);
+}
+
+
+/* --- HOVER UTILITIES --- */
+
+@utility hover-none {
+    @apply cursor-pointer select-none duration-75;
+}
+
+@utility hover-75 {
+    @apply cursor-pointer select-none duration-75 pointer-fine:hover:opacity-75;
+}
+
+@utility hover-scale-105 {
+    @apply cursor-pointer select-none duration-75 pointer-fine:hover:scale-105;
+}
+
+
+/* --- STYLE UTILITIES --- */
+
+@utility wrapper-default {
+    @apply mx-auto max-w-2xl;
+}
+
+@utility card-grid {
+    @apply grid grid-cols-1 3xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6;
+}
+
+@utility button-app {
+    @apply py-3 inline-block text-sm font-semibold text-center uppercase rounded-3xl hover-scale-105 disabled:pointer-events-none disabled:opacity-50;
+}
+
+@utility button-app-default {
+    @apply button-app bg-app-yellow text-app-black border-0;
+}
+
+@utility button-app-transparent {
+    @apply button-app border-2 border-app-yellow text-app-yellow;
+}
+
+@utility form-input {
+    @apply px-5 h-12 w-full bg-app-white border border-app-grey-medium rounded-3xl placeholder:text-app-grey-medium focus:outline-0 focus:border-app-black;
+}
+
+@utility form-input-textarea {
+    @apply form-input p-5;
+}
+
+
+/* --- OTHER UTILITIES --- */
+
+@utility scrollbar-hidden {
+    @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
