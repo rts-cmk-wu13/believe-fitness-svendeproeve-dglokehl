@@ -14,7 +14,7 @@ export function getAvgRating(ratings: FitnessClassRating[]) {
 export function isAllowedToSignup(fitnessClass: FitnessClass, user: User, isSignedUp: boolean) {
     if (isSignedUp) return true
 
-    const hasOthersSameDay = user.classes.some((userClass) => userClass.classDay === fitnessClass.classDay)
+    const hasOthersSameDay = user.classes.some((userClass) => userClass.classDay.toLowerCase() === fitnessClass.classDay.toLowerCase())
     if (hasOthersSameDay) return false
 
     const maxParticipantsReached = fitnessClass.users.length >= fitnessClass.maxParticipants 

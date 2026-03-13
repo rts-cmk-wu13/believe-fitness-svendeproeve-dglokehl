@@ -138,7 +138,7 @@ export async function registerNewsletter(initialState: FormState, formData: Form
 
     const oldSignups = await fetchNoCache("http://localhost:4000/api/v1/newsletter")
 
-    const isSignedup = oldSignups.some((signup: any) => signup.email === formObject.email)
+    const isSignedup = oldSignups.some((signup: any) => String(signup.email).toLowerCase() === String(formObject.email).toLowerCase())
     if (isSignedup) return {
         message: "You're already signed up for our newsletter!",
         errors: {

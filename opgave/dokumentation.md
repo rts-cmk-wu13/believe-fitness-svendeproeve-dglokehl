@@ -1,6 +1,5 @@
 # Believe Fitness - Loke Hochheim Lunde (WU13)
 
----
 ## Om opgaven
 
 Visse steder har jeg valgt at tilføje noget funktionalitet som ikke nødvendigvis stod som et krav i opgaven, men som jeg følte var relativt åbenlyst at gøre. Her er de ting som jeg har tilføjet/ændret på:
