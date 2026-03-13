@@ -11,7 +11,7 @@ export default async function Header({ title, className }: HeaderProps) {
     const token = await getToken()
 
     return (
-        <header className={`px-default h-header flex justify-between items-center gap-4 fixed top-0 inset-x-0 z-9999 pointer-events-none *:pointer-events-auto ${className ? className : ""}`}>
+        <header className={`wrapper-default px-default h-header flex justify-between items-center gap-4 fixed top-0 inset-x-0 z-9999 pointer-events-none *:pointer-events-auto ${className ? className : ""}`}>
             <div className="flex items-center gap-6">
                 <BackArrow />
                 {title && <p className="text-2xl">{title}</p>}

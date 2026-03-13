@@ -13,6 +13,8 @@ export async function fetchRevalidate(url: string, revalidate?: number) {
 
 export async function fetchRevalidateAuth(url: string, revalidate?: number) {
     const token = await getToken()
+    if (!token) return console.error("No token found")
+
     try {
         const res = await fetch(url, {
             next: { revalidate: revalidate ? revalidate : 3600 },
@@ -42,6 +44,7 @@ export async function fetchNoCache(url: string) {
 
 export async function fetchNoCacheAuth(url: string) {
     const token = await getToken()
+    if (!token) return console.error("No token found")
 
     try {
         const res = await fetch(url, {

@@ -24,7 +24,7 @@ export default function BurgerMenuButton({ isLoggedIn, className }: BurgerMenuBu
                 <LuAlignRight className={buttonStyle} onClick={handleMenu} />
             ) : (
                 <>
-                    <LuX className={`${buttonStyle} fixed z-99999 top-default right-default`} onClick={handleMenu} />
+                    <LuX className={`${buttonStyle} absolute z-99999 top-default right-default`} onClick={handleMenu} />
                     <BurgerMenu isLoggedIn={isLoggedIn}/>
                 </>
             )}

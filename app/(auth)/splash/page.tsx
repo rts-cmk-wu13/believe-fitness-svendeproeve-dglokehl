@@ -32,7 +32,7 @@ export default async function SplashPage() {
                 height={randImage.height}
                 className={`w-full h-dvh object-cover`}
             />
-            <div className="w-full flex flex-col items-center gap-16 absolute bottom-12 z-1">
+            <div className="wrapper-default w-full flex flex-col items-center gap-16 absolute bottom-12 inset-x-0 z-1">
                 <Logo inverted className="self-start" />
                 <SplashSessionButton />
             </div>

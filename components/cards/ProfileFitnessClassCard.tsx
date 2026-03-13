@@ -12,7 +12,7 @@ type ProfileFitnessClassCardProps = {
 
 export default async function ProfileFitnessClassCard({ classId, userRole, className }: ProfileFitnessClassCardProps) {
     const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${classId}`)
-    console.log("fitnessClass:", fitnessClass)
+    // console.log("fitnessClass:", fitnessClass)
 
     return (
         <article className={`p-5 space-y-2.5 border border-app-grey-medium rounded-3xl ${className ? className : ""}`}>

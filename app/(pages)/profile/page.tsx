@@ -21,12 +21,16 @@ export default async function ProfilePage() {
         <PageWrapper header={{ title: "My Profile" }}>
             <UserCard user={user} className="mb-7" />
 
-            {user.role === "default" && user.classes.length > 0 ?
-                <DefaultProfileOverview fitnessClasses={user.classes} />
-            : (
-                <p className="text-sm text-app-grey-dark text-center">
-                    You're currently not signed up for any classes.<br /><Link href="/classes" className="underline">Find a class now?</Link>
-                </p>
+            {user.role === "default" && (
+                <>
+                    {user.classes.length > 0 ?
+                        <DefaultProfileOverview fitnessClasses={user.classes} />
+                    : (
+                        <p className="text-sm text-app-grey-dark text-center">
+                            You're currently not signed up for any classes.<br /><Link href="/classes" className="underline">Find a class now?</Link>
+                        </p>
+                    )}
+                </>
             )}
 
             {user.role === "admin" && <AdminProfileOverview />}

@@ -17,7 +17,7 @@ export default function NewsletterForm() {
     }
 
     const [state, formAction, pending] = useActionState(registerNewsletter, initialState)
-    console.log("state:", state)
+    // console.log("state:", state)
 
     return (
         <section className="space-y-3">

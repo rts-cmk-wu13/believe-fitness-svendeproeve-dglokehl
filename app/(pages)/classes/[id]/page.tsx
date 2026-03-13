@@ -33,11 +33,11 @@ export default async function ClassDetailsPage({ params }: { params: Promise<{ i
     const user: User = await fetchNoCacheAuth(`http://localhost:4000/api/v1/users/${userId}`)
     console.log("user:", user)
     
-    const isSignedUp = fitnessClass.users.some((user) => user.id == Number(userId))
-    const isAllowed = isAllowedToSignup(fitnessClass, user, isSignedUp)
+    const isSignedUp = user ? fitnessClass.users.some((user) => user.id == Number(userId)) : false
+    const isAllowed = user ? isAllowedToSignup(fitnessClass, user, isSignedUp) : false
     // console.log("isAllowed:", isAllowed)
 
-    const userRating = getUserRating(ratings, userId)
+    const userRating = user ? getUserRating(ratings, userId) : 0
 
     return (
         <PageWrapper main={{ className: "mt-0! pt-0! pb-10 space-y-4" }}>

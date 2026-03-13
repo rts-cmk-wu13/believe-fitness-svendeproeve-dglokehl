@@ -8,9 +8,9 @@ type ParticipantCardProps = {
 
 export default function ParticipantCard({ user, className }: ParticipantCardProps) {
     return (
-        <article className={`py-3 px-6 flex items-center gap-2.5 border border-app-black rounded-3xl ${className ? className : ""}`}>
+        <div className={`py-3 px-6 flex items-center gap-2.5 border border-app-black rounded-3xl ${className ? className : ""}`}>
             <IoPerson className="size-5" />
             <p className="text-lg">{user.userFirstName} {user.userLastName}</p>
-        </article>
+        </div>
     )
 }

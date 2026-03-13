@@ -3,8 +3,8 @@
 import { useActionState, useState } from "react";
 import Form from "next/form";
 import type { FitnessClass, FormState } from "@/app/api/types";
-import InputWrapper from "./InputWrapper";
 import { createFitnessClass, editFitnessClass } from "@/app/api/actions";
+import InputWrapper from "./InputWrapper";
 
 type FitnessClassFormProps = {
     fitnessClass?: FitnessClass;

@@ -8,12 +8,12 @@ export const metadata = {
 
 export default async function SignupPage() {
     return (
-        <>
-            <Logo className="mb-12 pt-10" />
-            <Main className="space-y-5">
+        <Main className="mt-default! space-y-12">
+            <Logo className="px-0!" />
+            <section className="space-y-5">
                 <h2 className="text-lg font-semibold">Sign up as a new user</h2>
                 <SignupForm />
-            </Main>
-        </>
+            </section>
+        </Main>
     )
 }

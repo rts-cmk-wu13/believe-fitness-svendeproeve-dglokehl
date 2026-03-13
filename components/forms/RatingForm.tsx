@@ -21,7 +21,7 @@ export default function RatingForm({ fitnessClass, userRating, className }: Rati
     }
 
     const [state, formAction, pending] = useActionState(addUserRating, initialState)
-    // console.log("state:", state)
+    console.log("state:", state)
 
     return (
         <Form

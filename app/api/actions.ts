@@ -184,7 +184,7 @@ export async function registerNewsletter(initialState: FormState, formData: Form
 
 
 export async function sendContactMessage(initialState: FormState, formData: FormData): Promise<FormState> {
-    // console.log("registerNewsletter called")
+    // console.log("sendContactMessage called")
 
     const formObject = {
         name: formData.get("name"),
@@ -215,7 +215,7 @@ export async function sendContactMessage(initialState: FormState, formData: Form
     }
 
     const data = await res.json();
-    // console.log("data:", data)
+    console.log("data:", data)
 
     return {
         message: "Thank you for contacting us, we will answer your message ASAP!",
@@ -288,7 +288,7 @@ export async function addUserToClass(classId: number) {
 }
 
 export async function removeUserFromClass(classId: number) {
-    // console.log("addUserToClass called")
+    // console.log("removeUserFromClass called")
 
     const token = await getToken()
     const userId = await getUserId()
@@ -393,7 +393,7 @@ export async function createFitnessClass(initialState: FormState, formData: Form
 }
 
 export async function editFitnessClass(initialState: FormState, formData: FormData): Promise<FormState> {
-    // console.log("createFitnessClass called")
+    // console.log("editFitnessClass called")
 
     let assetId = formData.get("assetId")
 
@@ -436,13 +436,6 @@ export async function editFitnessClass(initialState: FormState, formData: FormDa
         maxParticipants: formObject.maxParticipants,
         assetId: assetId,
     }
-    // return {
-    //     message: "hej",
-    //     errors: {
-    //         fieldErrors: {}
-    //     },
-    //     inputs: newFormObject,
-    // }
 
     const classId = formData.get("classId")
     const token = await getToken()

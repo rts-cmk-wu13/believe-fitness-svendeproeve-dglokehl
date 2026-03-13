@@ -16,14 +16,16 @@ export default async function HomePage() {
 
     return (
         <PageWrapper main={{ className: "mt-0! pt-0! pb-10 space-y-12" }}>
-            <Hero />
+            <div className="px-0! *:not-first:px-default">
+                <Hero />
 
-            <section className="space-y-4">
-                <h2 className="text-6xl font-bold text-app-yellow">News</h2>
-                <div className="space-y-12">
-                    {news.map((item: NewsArticle, i: number) => <NewsArticleCard article={item} key={i} />)}
-                </div>
-            </section>
+                <section className="mt-default space-y-4">
+                    <h2 className="text-6xl font-bold text-app-yellow">News</h2>
+                    <div className="space-y-12">
+                        {news.map((item: NewsArticle, i: number) => <NewsArticleCard article={item} key={i} />)}
+                    </div>
+                </section>
+            </div>
 
             <hr className="mx-auto h-0.5 w-10 bg-app-black border-0" />
 
