@@ -1,6 +1,10 @@
 import Link from "next/link";
 
-export default function NotFound() {
+export const metadata = {
+    title: "404 Page not found"
+}
+
+export default async function NotFound() {
     return (
         <div className="h-dvh flex flex-col justify-center items-center gap-12 text-center">
             <div className="space-y-1">

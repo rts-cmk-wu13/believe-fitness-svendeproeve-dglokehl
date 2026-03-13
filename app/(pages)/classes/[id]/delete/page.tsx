@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import type { FitnessClass } from "@/app/api/types";
 import { fetchNoCache } from "@/app/api/fetches";
 import PageWrapper from "@/components/layout/PageWrapper"
@@ -7,6 +8,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     const { id } = await params;
 
     const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)
+    if (!fitnessClass) return notFound()
 
     return {
         title: `Delete: ${fitnessClass.className}`
@@ -17,6 +19,7 @@ export default async function DeleteClassPage({ params }: { params: Promise<{ id
     const { id } = await params;
 
     const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)
+    if (!fitnessClass) return notFound()
     console.log("fitnessClass:", fitnessClass)
 
     return (

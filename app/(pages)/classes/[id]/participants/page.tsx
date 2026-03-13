@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { fetchNoCache, fetchNoCacheAuth } from "@/app/api/fetches";
 import { getUserId } from "@/utils/cookies"
 import type { FitnessClass, User } from "@/app/api/types";
@@ -9,6 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     const { id } = await params;
 
     const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)
+    if (!fitnessClass) return notFound()
 
     return {
         title: `Participants: ${fitnessClass.className}`
@@ -18,13 +20,14 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 export default async function ParticipantsClassPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
+    const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)
+    if (!fitnessClass) return notFound()
+    console.log("fitnessClass:", fitnessClass)
+
     const userId = await getUserId()
 
     const user: User = await fetchNoCacheAuth(`http://localhost:4000/api/v1/users/${userId}`)
     console.log("user:", user)
-
-    const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)
-    console.log("fitnessClass:", fitnessClass)
 
     return (
         <PageWrapper header={{ title: "Participants" }} main={{ className: "space-y-7" }}>

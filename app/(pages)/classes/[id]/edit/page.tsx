@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import type { FitnessClass } from "@/app/api/types";
 import PageWrapper from "@/components/layout/PageWrapper"
 import FitnessClassForm from "@/components/forms/FitnessClassForm"
@@ -7,6 +8,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     const { id } = await params;
 
 	const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)
+    if (!fitnessClass) return notFound()
 
 	return {
 		title: `Edit: ${fitnessClass.className}`
@@ -17,6 +19,7 @@ export default async function EditClassPage({ params }: { params: Promise<{ id: 
     const { id } = await params;
 
     const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)
+    if (!fitnessClass) return notFound()
     console.log("fitnessClass:", fitnessClass)
 
     return (

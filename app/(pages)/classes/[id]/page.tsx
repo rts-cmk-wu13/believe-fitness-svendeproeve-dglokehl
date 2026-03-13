@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { fetchNoCache, fetchNoCacheAuth } from "@/app/api/fetches";
 import type { FitnessClass, FitnessClassRating, User, UserRole } from "@/app/api/types";
 import PageWrapper from "@/components/layout/PageWrapper";
@@ -12,6 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     const { id } = await params;
 
 	const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)
+    if (!fitnessClass) return notFound()
 
 	return {
 		title: fitnessClass.className
@@ -22,6 +24,7 @@ export default async function ClassDetailsPage({ params }: { params: Promise<{ i
     const { id } = await params;
 
     const fitnessClass: FitnessClass = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}`)
+    if (!fitnessClass) return notFound()
     console.log("fitnessClass:", fitnessClass)
 
     const ratings: FitnessClassRating[] = await fetchNoCache(`http://localhost:4000/api/v1/classes/${id}/ratings`)
